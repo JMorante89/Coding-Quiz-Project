@@ -3,42 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>coding Quiz</title>
+    <title>Coding Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- This will show the timer at the top of the page -->
     <header class="timer">
         <h1>Time: <span class="time">120</span></h1>
     </header>
-<!-- This will show the Starting Quiz intro with instructions on how to play -->
+    <!-- This will show the Starting Quiz intro with instructions on how to play -->
     <div class="intro">
         <h1>Coding Quiz</h1>
         <p>Try to answer the following code-related questions within the time limit. 
             Keep in mind that incorrect answers will penalize your time by ten seconds!</p>
         <button class="start">Start Quiz</button>
     </div>
-<!-- This div will show the quiz questions -->
+    <!-- This div will show the quiz questions -->
     <div class="quiz">
-        <h1 class="question">Question</h1>
+        <h2 class="question">Question</h2>
         <div class="choices">
             <button class="choice choice-1">Choice 1</button>
             <button class="choice choice-2">Choice 2</button>
             <button class="choice choice-3">Choice 3</button>
             <button class="choice choice-4">Choice 4</button>
         </div>
+        <!-- This div will show the feedback for the quiz questions -->
         <div class="feedback-container">
             <h2 class="feedback">Correct!</h2>
         </div>
     </div>
-<!-- This div will show the quiz results -->
+    <!-- This div will show the quiz results -->
     <div class="results">
         <h1>All Done!</h1>
-        <p>Your final score is <span class="score">0</span>.</p>
+        <p>Your final score is "<span class="score">0</span>"</p>
+        <!-- This form will allow user to input their initials -->
         <form class="high-score">
             <label for="initials">Enter Initials:</label>
             <input type="text" name="initials" id="initials">
             <button class="submit" type="submit">Submit</button>
+            <p>High Scores:</p>
         </form>
+        <!-- This ol will show the leaderboard -->
         <ol class="leaderboard"></ol>
         <button class="restart">Restart Quiz</button>
     </div>

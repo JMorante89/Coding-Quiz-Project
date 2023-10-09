@@ -1,3 +1,4 @@
+// Define a class 'Question' with a constructor that initializes question and answer properties.
 class Question {
     constructor(question, correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3) {
         this.question = question;
@@ -8,7 +9,9 @@ class Question {
     }
 }
 
+// An array of 'Question' objects, using the 'scrambleArray' function to shuffle the questions.
 let questions = scrambleArray([
+    // Multiple questions with correct and incorrect answers.
     new Question("Which of the following best describes a Web API?",
     "Built into your web browser and contain methods that allow us to manipulate a web page via JavaScript.",
     "A part of the JavaScript language itself.",
@@ -161,6 +164,7 @@ let questions = scrambleArray([
     'if (a != null)')
 ]);
 
+// Define variables to store references to various DOM elements.
 const quizIntro = document.querySelector(".intro");
 const quizSection = document.querySelector(".quiz");
 const endResults = document.querySelector(".results");
@@ -174,11 +178,12 @@ const scoreEl = document.querySelector(".score");
 const highScoreEl = document.querySelector(".high-score");
 const restartBtn = document.querySelector(".restart");
 
-
+// Function to generate a random integer between 0 and 'max' (exclusive).
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+// Function to shuffle an array using a copy of the original array.
 function scrambleArray(array) {
     var copy = array.slice();
     var scrambledArray = [];
@@ -192,19 +197,19 @@ function scrambleArray(array) {
     return scrambledArray;
 }
 
+// Functions to show and hide DOM elements by adding/removing the "hide" class.
 function showElement(element) {
     element.classList.remove("hide");
 }
-
 function hideElement(element) {
     element.classList.add("hide");
 }
 
-
+// Hide the quiz section and end results initially.
 hideElement(quizSection);
 hideElement(endResults);
 
-
+// Function to start the quiz when the "Start" button is clicked.
 function startQuiz() {
     hideElement(quizIntro);
     showElement(quizSection);
@@ -212,14 +217,19 @@ function startQuiz() {
     startTimer();
 }
 
+// Event listeners start assigned functions once clicked.
 startButton.addEventListener("click", startQuiz);
 highScoreEl.addEventListener("submit", submitScore);
+restartBtn.addEventListener("click", restartQuiz);
 
+
+// Variables for tracking the current question, feedback text, score, and leaderboard.
 var currentQuestion = 0;
 var feedbackText = '';
 var score = 0;
 var leaderboard = [];
 
+// Function to display the current question and answer choices.
 function displayQuestion() {
     var question = questions[currentQuestion];
     var questionElement = document.querySelector(".question");
@@ -236,12 +246,13 @@ function displayQuestion() {
     feedback.textContent = feedbackText;
 }
 
+// Event listeners to the answer choice buttons to handle user responses.
 choiceBtn1.addEventListener("click", answerQuestion);
 choiceBtn2.addEventListener("click", answerQuestion);
 choiceBtn3.addEventListener("click", answerQuestion);
 choiceBtn4.addEventListener("click", answerQuestion);
 
-
+// Function to handle user's answer selection.
 function answerQuestion(event) {
     var answer = event.target.textContent;
     var question = questions[currentQuestion];
@@ -261,6 +272,7 @@ function answerQuestion(event) {
     }
 }
 
+// Function to end the quiz and display the final score and allow user to input initials.
 function endQuiz() {
     hideElement(quizSection);
     showElement(endResults);
@@ -268,10 +280,12 @@ function endQuiz() {
     clearInterval(timerInterval);
 }
 
+// Variables for the timer and set the initial time left to 120 seconds.
 var timerInterval;
 var timeLeft = 120;
 var timerEl = document.querySelector(".time");
 
+// Function to start the timer countdown and if the timer reaches 0, end the quiz.
 function startTimer() {
     timeLeft = 120;
     timerInterval = setInterval(function() {
@@ -284,10 +298,13 @@ function startTimer() {
     }, 1000);
 }
 
+// Function to display the remaining time.
 function displayTimer() {
     timerEl.textContent = timeLeft;
 }
 
+// Function to update the leaderboard with the user's score and initials.  
+// The results are organized by score in descending order and stored in local storage.
 function updateLeaderboard() {
     var storedLeaderboard = localStorage.getItem("leaderboard");
     if (storedLeaderboard) {
@@ -301,6 +318,7 @@ function updateLeaderboard() {
     }
 }
 
+// Function to submit the user's initials and score to the leaderboard.
 function submitScore(event) {
     event.preventDefault();
     var initials = document.querySelector("#initials").value;
@@ -314,6 +332,7 @@ function submitScore(event) {
     displayLeaderboard();
 }
 
+// Function to display the leaderboard by creating a list.
 function displayLeaderboard() {
     var leaderboardEl = document.querySelector(".leaderboard");
     leaderboardEl.innerHTML = "";
@@ -325,6 +344,8 @@ function displayLeaderboard() {
     });
 }
 
+// Function to restart the quiz by hiding the end results and showing the quiz intro.
+// This is displayed when the user finishes the quiz.
 function restartQuiz() {
     hideElement(endResults);
     showElement(quizIntro);
@@ -335,6 +356,4 @@ function restartQuiz() {
     displayTimer();
     questions = scrambleArray(questions);
 }
-
-restartBtn.addEventListener("click", restartQuiz);
 
