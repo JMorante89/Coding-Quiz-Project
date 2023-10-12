@@ -164,6 +164,7 @@ let questions = scrambleArray([
     'if (a != null)')
 ]);
 
+
 // Define variables to store references to various DOM elements.
 const quizIntro = document.querySelector(".intro");
 const quizSection = document.querySelector(".quiz");
